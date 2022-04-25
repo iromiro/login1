@@ -1,7 +1,5 @@
 package com.example.login1.model;
 
-import com.example.login1.model.User;
-
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -15,6 +13,13 @@ public class Role {
     private String role;
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Collection<User> users;
+
+    public Role() {
+    }
+
+    public Role(String role) {
+        this.role = role;
+    }
 
     public long getId() {
         return id;

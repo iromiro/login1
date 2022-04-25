@@ -15,7 +15,6 @@ public class User {
 
     @Column(name = "email")
     private String email;
-    @ValidPassword
     @Column(name = "password")
     @NotNull
     @Size(min = 8, max = 30)
@@ -34,7 +33,7 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;

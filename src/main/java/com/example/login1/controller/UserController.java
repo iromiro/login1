@@ -1,46 +1,35 @@
 package com.example.login1.controller;
 
-import com.example.login1.model.PasswordConstraintValidator;
 import com.example.login1.model.User;
-import com.example.login1.model.ValidPassword;
 import com.example.login1.service.UserService;
-import org.passay.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
     UserService userService;
 
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerPage(Model model) {
-        model.addAttribute("user", new User());
-        return "register";
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public boolean login(String password, String username) {
+        //check login user exists and password valid
+        userService.login(username, password);
+        return false;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String saveRegisterPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
-        model.addAttribute("user", user);
-
-        if (result.hasErrors()) {
-            return "register";
-        } else {
-            userService.saveUser(user);
-
-        }
+    public String register(@Valid User user) {
+        userService.saveUser(user);
         return "index";
     }
 

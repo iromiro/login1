@@ -1,9 +1,9 @@
 package com.example.login1.service;
 
-import com.example.login1.model.PasswordConstraintValidator;
 import com.example.login1.repository.RoleRepository;
 import com.example.login1.model.User;
 import com.example.login1.repository.UserRepository;
+import com.example.login1.validation.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +17,21 @@ public class UserService {
     @Autowired
     RoleRepository roleRepository;
 
-    PasswordConstraintValidator passwordvalidator;
+    @Autowired
+    PasswordValidator passwordValidator;
+
 
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    public void login(String username, String password) {
+        userRepository.findByUsername(username);
+        passwordValidator.isValidPassword(password);
+    }
+
+
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
