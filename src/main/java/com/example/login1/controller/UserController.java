@@ -23,6 +23,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public boolean login(String password, String username) {
         //check login user exists and password valid
+        User user = new User(username, password);
         userService.login(username, password);
         return false;
     }
@@ -36,11 +37,6 @@ public class UserController {
 
     @RequestMapping("/")
     public String index() {
-        return "index";
-    }
-
-    @RequestMapping("/index")
-    public String index2() {
         return "index";
     }
 

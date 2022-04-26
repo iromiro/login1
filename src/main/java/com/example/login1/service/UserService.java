@@ -31,8 +31,6 @@ public class UserService {
         passwordValidator.isValidPassword(password);
     }
 
-
-
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
