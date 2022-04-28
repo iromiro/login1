@@ -22,7 +22,7 @@ public class User {
 
     @Column(name = "password")
     @NotNull
-    @Pattern(regexp = "/^[a-z0-9_-]{6,18}$/", message = "Invalid password")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", message = "Invalid password")
     private String password;
 
     @Column(name = "first_name")

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -28,20 +29,17 @@ public class UserController {
         return new ResponseEntity<User>(registeredUser, HttpStatus.CREATED);
     }
 
-    @PostMapping("/login")
-    public boolean login(@Valid @RequestBody String password, String username){
-        return userRepository.findByUsername(username) != null;
+    @GetMapping("/userList")
+    public ResponseEntity<List<User>> getUserList(){
+        List<User> allUsers = userService.getUserList();
+        return new ResponseEntity<List<User>>(allUsers, HttpStatus.OK);
     }
 
-
-    //@RequestMapping(value = "/login", method = RequestMethod.POST)
-    //public boolean login(String password, String username) {
+    @PostMapping(value = "/login")
+    public ResponseEntity<Boolean> login(@RequestBody User user) {
         //check login user exists and password valid
-      //  User user = new User(password, username);
-        //if(username != null && password !=null){
-          //  userService.login(password, username);
-        //}
-        //return false;
-    //}
+        Boolean login = userService.login(user.getPassword(), user.getUsername());
+        return new ResponseEntity<Boolean>(login, HttpStatus.OK);
+    }
 
 }

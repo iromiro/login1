@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -36,7 +37,18 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void login(String password, String username){
-        userRepository.findByUsername(username);
+    public List<User> getUserList(){
+        return userRepository.findAll();
+    }
+
+    public boolean login(String password, String username) {
+
+        User user = userRepository.findByUsername(username);
+        if (user.getPassword().equals(password)) {
+            System.out.println("Succesfully logged in");
+            return true;
+        } else {
+            return false;
+        }
     }
 }
