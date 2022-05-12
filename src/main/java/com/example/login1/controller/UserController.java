@@ -18,10 +18,6 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    @Autowired
-    ValidationHandler validation;
-    @Autowired
-    UserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@Valid @RequestBody User user){
