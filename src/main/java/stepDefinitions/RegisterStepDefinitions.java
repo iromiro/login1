@@ -44,5 +44,9 @@ public class RegisterStepDefinitions {
         System.out.println(arg0);
     }
 
+    @And("validation handler catches the error")
+    public void validationHandlerCatchesTheError() {
+        System.out.println("Validation handler catches the error");
+    }
 }
 

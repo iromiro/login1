@@ -14,5 +14,6 @@ Feature: Registration
 
     When email, firstname,lastname,username,password entered
     But password is not valid
+    And validation handler catches the error
     Then prints "invalid password"
 
